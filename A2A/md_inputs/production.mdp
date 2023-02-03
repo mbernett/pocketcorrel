@@ -1,0 +1,45 @@
+; Integrator
+dt = 0.002000
+nsteps = 150000000
+integrator = md
+cutoff-scheme = verlet
+; Restraints
+; ensemble NPT
+nstxout-compressed = 500
+nstenergy = 1000
+nstlog = 1000
+; Barostat
+pcoupl = Parrinello-Rahman
+ref_p = 1.01325
+tau_p = 2
+compressibility = 4.57000e-05
+pcoupltype = isotropic
+; Thermostat
+tcoupl = v-rescale
+ref_t = 300 300 300
+tau_t = 0.100000 0.100000 0.100000
+tc-grps = Protein PA_PC_OL CL_NA_Water
+; Bond parameters
+constraint_algorithm = lincs
+constraints = all-bonds
+lincs_iter =1
+lincs_order = 4
+; Neighbour searching
+nstlist = 20
+ns_type = grid
+rlist = 1.100000
+coulombtype = PME
+fourierspacing = 0.160000
+rcoulomb = 1.100000
+rvdw = 1.100000
+pbc = xyz
+;energygrps = Protein Non-Protein
+; COM motion removal
+; These options remove motion of the protein/bilayer relative to the solvent/ions
+nstcomm         = 1
+comm-mode       = Linear
+comm-grps       = Protein_PA_PC_OL CL_NA_Water
+; Scale COM of reference coordinates
+refcoord_scaling = com
+gen_vel = no
+continuation = yes
